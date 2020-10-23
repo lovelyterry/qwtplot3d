@@ -25,7 +25,6 @@
 
 #include "mesh2mainwindow.h"
 
-#include "colormapreader.h"
 #include "femreader.h"
 #include "functions.h"
 #include "lightingdlg.h"
