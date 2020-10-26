@@ -12,17 +12,14 @@
 class DesignerWorkaround {
 public:
     QMenuBar* menubar;
-    QMenu*    filemenu;
     QMenu*    colormenu;
     QMenu*    fontmenu;
     QToolBar* mainToolbar;
     QToolBar* csToolbar;
-    QAction*  openFile;
-    QAction*  openMeshFile;
+
     QAction*  animation;
     QAction*  dump;
     QAction*  normals;
-    QAction*  Exit;
 
     QActionGroup* coord;
     QAction*      Box;

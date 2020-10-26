@@ -20,10 +20,9 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    Mesh2MainWindow mainwindow;
+    Mesh2MainWindow mainwindow {};
 
     mainwindow.resize(1024, 768);
     mainwindow.show();
-
     return app.exec();
 }

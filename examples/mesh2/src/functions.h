@@ -12,24 +12,20 @@ public:
     Rosenbrock(SurfacePlot& pw)
         : Function(pw) {
     }
-
     double operator()(double x, double y) {
         return 0.7 * log10((1 - x) * (1 - x) + 10 * (y - x * x) * (y - x * x));
     }
-    //	QString name() const {return "Almost {\\it Rosenbrock}\\,:\\quad$\\frac{\\ln((1-x)^2 + 100(y-x^2)^2)}{8}$";}
 };
 
 class Hat : public Function {
 public:
     Hat(SurfacePlot& pw)
         : Function(pw) {
-        //setMinZ(0.3);
         setDomain(0, 10, 0, 10);
     }
 
     double operator()(double x, double y) {
         return 1.0 / (x * x + y * y + 0.5);
-        //return x*x*y/(x*x*x*x+y*y);
     }
 };
 
@@ -42,9 +38,7 @@ public:
     }
 
     double operator()(double x, double y) {
-        return (cos(sqrt(x * x + y * y) + cos(sqrt(((x + .913 * 2 * Qwt3D::PI) * (x + .913 * 2 * Qwt3D::PI)) + y * y))
-                    + cos(sqrt(((x - .913 * 2 * Qwt3D::PI) * (x - .913 * 2 * Qwt3D::PI)) + (y * y))))
-                * 4);
+        return (cos(sqrt(x * x + y * y) + cos(sqrt(((x + .913 * 2 * Qwt3D::PI) * (x + .913 * 2 * Qwt3D::PI)) + y * y)) + cos(sqrt(((x - .913 * 2 * Qwt3D::PI) * (x - .913 * 2 * Qwt3D::PI)) + (y * y)))) * 4);
     }
 };
 
@@ -52,20 +46,17 @@ class Saddle : public Function {
 public:
     Saddle()
         : Function() {
-        //	setMaxZ(0.8);
     }
 
     double operator()(double x, double y) {
         return x * x - y * y;
     }
-    //	QString name() const {return "$x^2-y^2$";}
 };
 
 class Mex : public Function {
 public:
     Mex()
         : Function() {
-        //	setMaxZ(0.8);
     }
 
     double operator()(double x, double y) {
@@ -76,7 +67,6 @@ public:
 
         return 20 * sin(sqrt(x * x + y * y)) / n;
     }
-    //	QString name() const {return "$\\frac{20\\sin\\sqrt{x^2+y^2}}{\\sqrt{x^2+y^2}}$";}
 };
 
 class Torus : public ParametricSurface {

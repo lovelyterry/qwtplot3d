@@ -16,8 +16,6 @@ public:
 class QLabel;
 class QTimer;
 class QAction;
-class QFileDialog;
-class LightingDlg;
 class ColorMapPreview;
 
 class Mesh2MainWindow : public DummyBase {
@@ -29,9 +27,6 @@ public:
     Qwt3D::SurfacePlot* dataWidget;
 
 public slots:
-    void open();
-    void openMesh();
-
     void createFunction(QString const& name);
     void createPSurface(QString const& name);
     void setFileType(QString const& name);
@@ -46,7 +41,6 @@ public slots:
     void pickLabelColor();
     void pickTitleColor();
     void pickDataColor();
-    void pickLighting();
     void resetColors();
     void pickNumberFont();
     void pickLabelFont();
@@ -81,27 +75,14 @@ public slots:
     void setBackGrid(bool b);
     void setGrid(Qwt3D::SIDE, bool);
 
-    void enableLighting(bool val);
-
 private:
-    QLabel *filenameWidget, *dimWidget,
-        *rotateLabel, *shiftLabel, *scaleLabel, *zoomLabel;
-
+    QLabel *filenameWidget, *dimWidget, *rotateLabel, *shiftLabel, *scaleLabel, *zoomLabel;
     QTimer* timer;
     int     redrawWait;
-
     QAction* activeCoordSystem;
-
     bool                  legend_;
     Qwt3D::StandardColor* col_;
-
-    QFileDialog* datacolordlg_;
-    LightingDlg* lightingdlg_;
     QString      filetype_;
-
-    // convenience compatib. code
-    bool connectA(const QObject* sender, const char* slot);
-    bool connectAG(const QObject* sender, const char* slot);
 };
 
 #endif /* include guarded */

@@ -1,29 +1,16 @@
 #include "designerworkaround.h"
 
 namespace {
-QString tr(const char* val) {
-    return QObject::tr(val);
-}
-
-void setCheckable(QActionGroup* ag) {
-    QList<QAction*> tmplist = ag->actions();
-    for (QList<QAction*>::iterator it = tmplist.begin(); it != tmplist.end(); ++it)
+void setCheckable(QActionGroup* arg) {
+    QList<QAction*> tmplist = arg->actions();
+    for (QList<QAction*>::iterator it = tmplist.begin(); it != tmplist.end(); ++it) {
         (*it)->setCheckable(true);
+    }
 }
-
 }  // namespace
 
 void DesignerWorkaround::setupWorkaround(QMainWindow* mw) {
-    // actions
-
-    openFile = new QAction(QIcon(":/images/fileopen.png"), tr("&Open File"), mw);
-    openFile->setShortcut(QKeySequence(tr("CTRL+O")));
-    openMeshFile = new QAction(QIcon(":/images/filecell.png"), tr("Open FEM File"), mw);
-
-    Exit = new QAction(tr("&Exit"), mw);
-    Exit->setShortcut(QKeySequence(tr("CTRL+Q")));
-
-    animation = new QAction(QIcon(":/images/movie.png"), tr("Animation"), mw);
+    animation = new QAction(QIcon(":/images/movie.png"), QObject::tr("Animation"), mw);
     animation->setCheckable(true);
     dump = new QAction(QIcon(":/images/savecontent.png"), "", mw);
 
@@ -62,34 +49,32 @@ void DesignerWorkaround::setupWorkaround(QMainWindow* mw) {
     normals->setCheckable(true);
 
     color           = new QActionGroup(mw);
-    axescolor       = new QAction(tr("&Axes"), color);
-    backgroundcolor = new QAction(tr("&Background"), color);
-    meshcolor       = new QAction(tr("&Mesh"), color);
-    numbercolor     = new QAction(tr("&Numbers"), color);
-    labelcolor      = new QAction(tr("&Label"), color);
-    titlecolor      = new QAction(tr("Caption"), color);
-    datacolor       = new QAction(tr("Data color"), color);
-    resetcolor      = new QAction(tr("&Reset"), color);
+    axescolor       = new QAction(QObject::tr("&Axes"), color);
+    backgroundcolor = new QAction(QObject::tr("&Background"), color);
+    meshcolor       = new QAction(QObject::tr("&Mesh"), color);
+    numbercolor     = new QAction(QObject::tr("&Numbers"), color);
+    labelcolor      = new QAction(QObject::tr("&Label"), color);
+    titlecolor      = new QAction(QObject::tr("Caption"), color);
+    datacolor       = new QAction(QObject::tr("Data color"), color);
+    resetcolor      = new QAction(QObject::tr("&Reset"), color);
 
     font       = new QActionGroup(mw);
-    numberfont = new QAction(tr("&Scale numbering"), font);
-    labelfont  = new QAction(tr("&Axes label"), font);
-    titlefont  = new QAction(tr("&Caption"), font);
-    resetfont  = new QAction(tr("&Reset"), font);
+    numberfont = new QAction(QObject::tr("&Scale numbering"), font);
+    labelfont  = new QAction(QObject::tr("&Axes label"), font);
+    titlefont  = new QAction(QObject::tr("&Caption"), font);
+    resetfont  = new QAction(QObject::tr("&Reset"), font);
 
     // toolbars
     mainToolbar = new QToolBar(QString(""), mw);
     mainToolbar->setMovable(false);
 
-    mainToolbar->addAction(openFile);
-    mainToolbar->addAction(openMeshFile);
     mainToolbar->addAction(dump);
 
-    filetypeCB = new QComboBox;
+	filetypeCB = new QComboBox;
     functionCB = new QComboBox;
     psurfaceCB = new QComboBox;
 
-    mainToolbar->addWidget(filetypeCB);
+	mainToolbar->addWidget(filetypeCB);
     mainToolbar->addWidget(functionCB);
     mainToolbar->addWidget(psurfaceCB);
 
@@ -106,35 +91,29 @@ void DesignerWorkaround::setupWorkaround(QMainWindow* mw) {
 
     // menubar
     menubar  = mw->menuBar();  //new QMenuBar();
-    filemenu = menubar->addMenu("&File");
-    filemenu->addAction(openFile);
-    filemenu->addAction(openMeshFile);
-    filemenu->addAction(animation);
-    filemenu->addAction(Exit);
-    colormenu = menubar->addMenu(tr("&Color"));
+
+    colormenu = menubar->addMenu(QObject::tr("&Color"));
     colormenu->addActions(color->actions());
-    fontmenu = menubar->addMenu(tr("&Fonts"));
+    fontmenu = menubar->addMenu(QObject::tr("&Fonts"));
     fontmenu->addActions(font->actions());
 
     mw->addToolBar(mainToolbar);
     mw->addToolBar(csToolbar);
 
     functionCB->clear();
-    functionCB->addItem(tr("---"));
-    functionCB->addItem(tr("Hat"));
-    functionCB->addItem(tr("Rosenbrock"));
-    functionCB->addItem(tr("Saddle"));
-    functionCB->addItem(tr("Sombrero"));
-    functionCB->addItem(tr("Ripple"));
-    functionCB->setToolTip(tr("Display function"));
+    functionCB->addItem(QObject::tr("---"));
+    functionCB->addItem(QObject::tr("Hat"));
+    functionCB->addItem(QObject::tr("Rosenbrock"));
+    functionCB->addItem(QObject::tr("Saddle"));
+    functionCB->addItem(QObject::tr("Sombrero"));
+    functionCB->addItem(QObject::tr("Ripple"));
+    functionCB->setToolTip(QObject::tr("Display function"));
     psurfaceCB->clear();
-    psurfaceCB->addItem(tr("---"));
-    psurfaceCB->addItem(tr("Torus"));
-    psurfaceCB->addItem(tr("Seashell"));
-    psurfaceCB->addItem(tr("Boy"));
-    psurfaceCB->addItem(tr("Dini"));
-    psurfaceCB->addItem(tr("Cone"));
-    psurfaceCB->setToolTip(tr("Display parametric surface. Turn Lighting on for better quality."));
-
-    QObject::connect(Exit, SIGNAL(triggered()), mw, SLOT(close()));
+    psurfaceCB->addItem(QObject::tr("---"));
+    psurfaceCB->addItem(QObject::tr("Torus"));
+    psurfaceCB->addItem(QObject::tr("Seashell"));
+    psurfaceCB->addItem(QObject::tr("Boy"));
+    psurfaceCB->addItem(QObject::tr("Dini"));
+    psurfaceCB->addItem(QObject::tr("Cone"));
+    psurfaceCB->setToolTip(QObject::tr("Display parametric surface. Turn Lighting on for better quality."));
 }
